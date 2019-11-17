@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock - Paper - Scissor</title>
+</head>
+<body>
+    <script>
+        function computerPlay() {
+            let moves = ['rock', 'paper', 'scissor'];
+            let choice = Math.floor(Math.random() * moves.length);
+            return moves[choice];
+        }
+
+        function playerPlay() {
+            let input = prompt('Rock, paper or scissor?');
+            return input.toLowerCase();
+        }
+
+        function playOneRound(playerMove, computerMove) {
+            if (playerMove === 'rock' || playerMove === 'paper' || playerMove === 'scissor') {
+                if ((playerMove === 'rock' && computerMove === 'scissor') || (playerMove === 'paper' && computerMove === 'rock') | (playerMove === 'scissor' && computerMove === 'paper')) {
+                    return 1;
+                }
+                if ((playerMove === 'rock' && computerMove === 'paper') || (playerMove === 'paper' && computerMove === 'scissor') || (playerMove === 'scissor' && computerMove === 'rock')) {
+                    return 2;
+                }
+                else {
+                    return 0;
+                }
+            } else {
+                return 0;
+            }
+        }
+
+        function game() {
+            let playerWins = 0,
+                computerWins = 0,
+                playerChoice,
+                computerChoice,
+                roundResult;
+            
+            for (let i = 0; i < 5; i++) {
+                playerChoice = playerPlay();
+                computerChoice = computerPlay();
+                roundResult = playOneRound(playerChoice, computerChoice);
+                if (roundResult == 1) {
+                    playerWins++;
+                } else if (roundResult == 2) {
+                    computerWins++;
+                }
+            }
+
+            if (playerWins > computerWins) {
+                return "You won the game";
+            } else if (playerWins < computerWins) {
+                return "You lost the game";
+            } else {
+                return "Both of you tied";
+            }
+        }
+
+        console.log(game());
+    </script>
+</body>
+</html>
